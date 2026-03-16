@@ -1,69 +1,48 @@
-# React + TypeScript + Vite
+# Fleet Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Fleet Management System using MBTA API.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚛️ **React 19 with Vite + TypeScript**, ensuring blazing fast PWA app creation with easy deployment strategy 
+- 🎨 **Tailwind CSS** for styling management, ensuring faster inline styling
+- 🖌️ **DaisyUI** for UI Library, ensuring faster development speed and minimizes styling repetition
+- ⚡ **Axios** for API Integrations, ensuring safety and convenience
+- 🗺️ **Leaflet and React Leaflet** for Map Integrations, ensuring easier implementation without the need of additional API key and payments
+<br />
+<br />
+> **Why not NextJS?**  
+Since this is a simple PWA app, we don't additional feature like SSR and dynamic routing.  
+It'll also enables deployment on a regular hosting provider out of the box since we don't need additional NodeJS runtime for the app once deployed.
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Install Dependencies
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Configure Env
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env` file in the root directory with your these configuration:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_URL=https://api-v3.mbta.com
+VITE_API_KEY=xxxxxxxxxx
+```
+
+API Key is **optional but encouraged** since it'll increase the API rate limit from 20 to 1000 per minutes  
+You can get the API key on MBTA Website [https://api-v3.mbta.com/](https://api-v3.mbta.com/)
+
+### 3. Run Development Server
+
+```bash
+npm run dev
+```
+
+### 4. Build for Production
+
+```bash
+npm run build
 ```
