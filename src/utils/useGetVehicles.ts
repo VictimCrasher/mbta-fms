@@ -43,5 +43,9 @@ export default function useGetVehicles(page: number = DEFAULT_PAGE, pageSize: nu
 		getVehicles(page, pageSize);
 	}, [page, pageSize]);
 
-	return { isLoading, data, links, error, totalPages };
+	const refetch = () => {
+		getVehicles(page, pageSize);
+	};
+
+	return { isLoading, data, links, error, totalPages, refetch };
 }

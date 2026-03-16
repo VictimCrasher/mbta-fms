@@ -46,7 +46,7 @@ export default function Pagination({
 	};
 
 	return (
-		<div className="flex justify-between items-center m-2">
+		<div className="flex flex-col md:flex-row gap-2 justify-between items-center m-2">
 			<div className="flex items-center gap-2">
 				<span className="text-sm text-nowrap">
 					Showing {pageSize * page - pageSize + 1} - {pageSize * page} of ~{total} items

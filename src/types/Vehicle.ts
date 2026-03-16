@@ -3,6 +3,12 @@ export type OccupancyStatus = "MANY_SEATS_AVAILABLE" | "FEW_SEATS_AVAILABLE" | "
 export type VehicleStatus = "INCOMING_AT" | "STOPPED_AT" | "IN_TRANSIT_TO";
 export type DirectionId = 0 | 1;
 
+export type IncludedData = {
+	type: string;
+	id: string;
+	attributes: object;
+};
+
 export type Carriage = {
 	occupancy_status: OccupancyStatus;
 	occupancy_percentage: number;
@@ -57,6 +63,12 @@ export type Vehicle = {
 export type VehicleResponse = {
 	data: Vehicle[];
 	links: VehicleLinks;
+	included: IncludedData[];
+};
+
+export type VehicleDetailResponse = {
+	data: Vehicle;
+	included: IncludedData[];
 };
 
 export type VehicleStatusLabel = {
