@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	--color-primary: hsl(62, 50%, 90%);
+  --color-primary-content: hsl(62, 50%, 10%);
+	--color-secondary: hsl(62, 50%, 10%);
+  --color-secondary-content: hsl(62, 50%, 90%);
+	--color-tertiary: hsl(122, 80%, 20%);
+  --color-tertiary-content: hsl(122, 80%, 80%);
+	--color-accent: hsl(2, 80%, 20%);
+  --color-accent-content: hsl(2, 80%, 80%);
+
+	color-scheme: light;
+	color: var(--color-primary-content);
+	background-color: var(--color-primary);
+}
