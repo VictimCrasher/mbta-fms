@@ -9,9 +9,8 @@ A simple Fleet Management System using MBTA API.
 - 🖌️ **DaisyUI** for UI Library, ensuring faster development speed and minimizes styling repetition
 - ⚡ **Axios** for API Integrations, ensuring safety and convenience
 - 🗺️ **Leaflet and React Leaflet** for Map Integrations, ensuring easier implementation without the need of additional API key and payments
-<br />
-<br />
-> **Why not NextJS?**  
+
+**Why not NextJS?**  
 Since this is a simple PWA app, we don't additional feature like SSR and dynamic routing.  
 It'll also enables deployment on a regular hosting provider out of the box since we don't need additional NodeJS runtime for the app once deployed.
 
