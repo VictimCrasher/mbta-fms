@@ -1,10 +1,11 @@
+import MainLayout from "@/components/MainLayout"
+import MainPage from "@pages/Main"
+
 function App() {
   return (
-    <div className="bg-primary min-h-screen min-w-screen">
-      <h1 className="text-3xl font-bold p-4">
-        Hello World!
-      </h1>
-    </div>
+    <MainLayout>
+      <MainPage />
+    </MainLayout>
   )
 }
 

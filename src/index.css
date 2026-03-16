@@ -12,13 +12,22 @@
 	-moz-osx-font-smoothing: grayscale;
 
 	--color-primary: hsl(62, 50%, 90%);
-  --color-primary-content: hsl(62, 50%, 10%);
+	--color-primary-content: hsl(62, 50%, 10%);
 	--color-secondary: hsl(62, 50%, 10%);
-  --color-secondary-content: hsl(62, 50%, 90%);
+	--color-secondary-content: hsl(62, 50%, 90%);
 	--color-tertiary: hsl(122, 80%, 20%);
-  --color-tertiary-content: hsl(122, 80%, 80%);
+	--color-tertiary-content: hsl(122, 80%, 80%);
 	--color-accent: hsl(2, 80%, 20%);
-  --color-accent-content: hsl(2, 80%, 80%);
+	--color-accent-content: hsl(2, 80%, 80%);
+
+	--pre-primary-color: hsl(62, 50%, 95%);
+	--pre-secondary-color: hsl(62, 50%, 95%);
+	--pre-tertiary-color: hsl(122, 80%, 95%);
+	--pre-accent-color: hsl(2, 80%, 95%);
+
+	--color-base-100: hsl(62, 20%, 100%);
+	--color-base-200: var(--pre-primary-color);
+	--color-base-300: hsl(62, 20%, 80%);
 
 	color-scheme: light;
 	color: var(--color-primary-content);
