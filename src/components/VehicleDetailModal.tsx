@@ -10,15 +10,19 @@ import {
 import {
 	ArrowClockwiseIcon,
 	ArticleIcon,
+	BicycleIcon,
+	BracketsSquareIcon,
 	BusIcon,
 	FlagCheckeredIcon,
+	HashIcon,
 	MapPinIcon,
 	MoneyIcon,
 	ShuffleAngularIcon,
 	UsersFourIcon,
+	WheelchairIcon,
 } from "@phosphor-icons/react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import type { TripAttributes } from "@/types/Trip";
+import { BIKES_ALLOWED_LABELS, WHEELCHAIR_ACCESSIBLE_LABELS, type TripAttributes } from "@/types/Trip";
 import Header from "./Header";
 import type { RouteAttributes } from "@/types/Route";
 
@@ -57,6 +61,7 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 			<dialog className="modal" open>
 				<div className="modal-box flex flex-col gap-4 justify-center items-center">
 					<span className="loading loading-infinity loading-2xl"></span>
+					<span className="text-sm text-gray-500">Loading vehicle data...</span>
 				</div>
 				{renderCloseButton(true)}
 			</dialog>
@@ -73,11 +78,19 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 			</dialog>
 		);
 
+	const routeData = included.find((item: IncludedData) => item.type === "route")?.attributes as RouteAttributes;
+	const tripData = included.find((item: IncludedData) => item.type === "trip")?.attributes as TripAttributes;
+
+	const bikesAllowed = tripData
+		? BIKES_ALLOWED_LABELS[tripData.bikes_allowed] || BIKES_ALLOWED_LABELS[0]
+		: BIKES_ALLOWED_LABELS[0];
+	const wheelchairAccessible = tripData
+		? WHEELCHAIR_ACCESSIBLE_LABELS[tripData.wheelchair_accessible] || WHEELCHAIR_ACCESSIBLE_LABELS[0]
+		: WHEELCHAIR_ACCESSIBLE_LABELS[0];
+
 	const currentStatus = VEHICLE_STATUS_LABELS[data.attributes.current_status] || UNKNOWN_STATUS_LABEL;
 	const occupancyStatus = OCCUPANCY_STATUS_LABELS[data.attributes.occupancy_status] || UNKNOWN_STATUS_LABEL;
-	const revenueStatus = REVENUE_STATUS_LABELS[data.attributes.revenue_status] || UNKNOWN_STATUS_LABEL;
-	const tripData = included.find((item: IncludedData) => item.type === "trip")?.attributes as TripAttributes;
-	const routeData = included.find((item: IncludedData) => item.type === "route")?.attributes as RouteAttributes;
+	const revenueStatus = REVENUE_STATUS_LABELS[data.attributes.revenue] || UNKNOWN_STATUS_LABEL;
 
 	return (
 		<dialog className="modal" open>
@@ -124,20 +137,17 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 
 							{/* Route Information */}
 							<Header name="Route Information" withBorder />
+							{renderItem(<ShuffleAngularIcon size={24} />, "Route Name", routeData.long_name)}
+							{renderItem(<HashIcon size={24} />, "Route Short Name", routeData.short_name)}
 							{renderItem(
-								<ShuffleAngularIcon size={24} />,
-								"Route Name",
-								`${routeData.long_name} (${routeData.short_name})`,
-							)}
-							{renderItem(
-								<ArticleIcon size={24} />,
+								<ArticleIcon size={24} weight="duotone" />,
 								"Description",
 								routeData.description || "No description available",
 							)}
 							{renderItem(
-								<FlagCheckeredIcon size={24} />,
+								<FlagCheckeredIcon size={24} weight="duotone" />,
 								"Directions",
-								routeData.direction_destinations.join(", "),
+								routeData.direction_destinations.join(" → "),
 							)}
 
 							{/* Trip Information */}
@@ -145,11 +155,28 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 							{renderItem(
 								<BusIcon size={24} weight="duotone" />,
 								"Trip name",
-								tripData.name || tripData.headsign || "Unknown",
+								tripData?.name || "Unknown",
+							)}
+							{renderItem(
+								<BracketsSquareIcon size={24} weight="duotone" />,
+								"Headsign",
+								tripData?.headsign || "Unknown",
+							)}
+							{renderItem(
+								<BicycleIcon size={24} weight="duotone" />,
+								"Bikes allowed?",
+								bikesAllowed.label,
+								bikesAllowed.color,
+							)}
+							{renderItem(
+								<WheelchairIcon size={24} weight="duotone" />,
+								"Wheelchair accessible?",
+								wheelchairAccessible.label,
+								wheelchairAccessible.color,
 							)}
 						</div>
 
-						<div className="mt-auto flex flex-col md:flex-row items-center gap-2">
+						<div className="mt-auto flex flex-row items-center gap-2">
 							<button className="btn btn-primary" onClick={refetch}>
 								<ArrowClockwiseIcon size={16} />
 								<span>Refresh</span>
@@ -158,7 +185,7 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 						</div>
 					</div>
 					{/* Map Container */}
-					<div className="w-full h-full flex flex-col gap-2">
+					<div className="w-full min-h-[50dvh] md:min-h-0 md:h-full flex flex-col gap-2">
 						<h2 className="text-lg font-bold">Current Location</h2>
 						<MapContainer
 							center={[data.attributes.latitude, data.attributes.longitude]}

@@ -45,7 +45,7 @@ export type Vehicle = {
 	attributes: {
 		updated_at: string;
 		speed: number; // in m/s
-		revenue_status: RevenueStatus;
+		revenue: RevenueStatus;
 		occupancy_status: OccupancyStatus;
 		current_status: VehicleStatus;
 		longitude: number;
