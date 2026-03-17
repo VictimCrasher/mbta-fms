@@ -29,6 +29,8 @@
 	--color-base-200: var(--pre-primary-color);
 	--color-base-300: hsl(62, 20%, 80%);
 
+	--input-color: var(--color-secondary);
+
 	color-scheme: light;
 	color: var(--color-primary-content);
 	background-color: var(--color-primary);

@@ -18,13 +18,14 @@ import {
 	MapPinIcon,
 	MoneyIcon,
 	ShuffleAngularIcon,
+	TrafficSignIcon,
 	UsersFourIcon,
 	WheelchairIcon,
 } from "@phosphor-icons/react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { BIKES_ALLOWED_LABELS, WHEELCHAIR_ACCESSIBLE_LABELS, type TripAttributes } from "@/types/Trip";
 import Header from "./Header";
-import type { RouteAttributes } from "@/types/Route";
+import { ROUTE_TYPE_LABELS, type RouteAttributes } from "@/types/Route";
 
 interface VehicleDetailModalProps {
 	vehicleId: string;
@@ -92,6 +93,9 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 	const occupancyStatus = OCCUPANCY_STATUS_LABELS[data.attributes.occupancy_status] || UNKNOWN_STATUS_LABEL;
 	const revenueStatus = REVENUE_STATUS_LABELS[data.attributes.revenue] || UNKNOWN_STATUS_LABEL;
 
+	const routeType = ROUTE_TYPE_LABELS[routeData.type] || "Unknown";
+	const directionDestinations = (routeData.direction_destinations || []).filter((d) => d);
+
 	return (
 		<dialog className="modal" open>
 			{error ? (
@@ -137,18 +141,25 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 
 							{/* Route Information */}
 							<Header name="Route Information" withBorder />
-							{renderItem(<ShuffleAngularIcon size={24} />, "Route Name", routeData.long_name)}
-							{renderItem(<HashIcon size={24} />, "Route Short Name", routeData.short_name)}
+							{renderItem(
+								<ShuffleAngularIcon size={24} />,
+								"Route Name",
+								routeData.long_name || "Unknown",
+							)}
+							{renderItem(<HashIcon size={24} />, "Route Short Name", routeData.short_name || "Unknown")}
+							{renderItem(<TrafficSignIcon size={24} />, "Route Type", routeType)}
 							{renderItem(
 								<ArticleIcon size={24} weight="duotone" />,
 								"Description",
 								routeData.description || "No description available",
 							)}
-							{renderItem(
-								<FlagCheckeredIcon size={24} weight="duotone" />,
-								"Directions",
-								routeData.direction_destinations.join(" → "),
-							)}
+							{directionDestinations.length > 0
+								? renderItem(
+										<FlagCheckeredIcon size={24} weight="duotone" />,
+										"Directions",
+										directionDestinations.join(" → "),
+									)
+								: null}
 
 							{/* Trip Information */}
 							<Header name="Trip Information" withBorder />

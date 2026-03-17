@@ -70,7 +70,12 @@ export default function Pagination({
 				{totalPages <= 4 ? (
 					<>
 						{Array.from(Array(totalPages), (_, i) => (
-							<button className={btnCN} key={i + 1} disabled={disabled}>
+							<button
+								className={`${btnCN} ${page === i + 1 ? "btn-secondary text-white" : ""}`}
+								key={i + 1}
+								disabled={disabled}
+								onClick={() => setPage(i + 1)}
+							>
 								{i + 1}
 							</button>
 						))}
