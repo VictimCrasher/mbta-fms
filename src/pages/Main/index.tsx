@@ -1,21 +1,27 @@
 import { useMemo, useState } from "react";
 import useGetVehicles from "@/utils/useGetVehicles";
+import useUrlFilters from "@/utils/useUrlFilters";
 import Alert from "@components/Alert";
 import CardSkeleton from "@components/CardSkeleton";
 import VehicleCard from "@components/VehicleCard";
 import Pagination from "@components/Pagination";
-import { DEFAULT_PAGE_SIZE } from "@/types/Pages";
 import type { Vehicle } from "@/types/Vehicle";
 import VehicleDetailModal from "@components/VehicleDetailModal";
 import { ArrowClockwiseIcon } from "@phosphor-icons/react";
 import MainFilters from "./MainFilters";
 
 export default function MainPage() {
-	const [page, setPage] = useState(1);
-	const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+	const {
+		page,
+		pageSize,
+		routeIds: selectedRouteIds,
+		tripIds: selectedTripIds,
+		setPage,
+		setPageSize,
+		setRouteIds,
+		setTripIds,
+	} = useUrlFilters();
 	const [detailVehicleId, setDetailVehicleId] = useState<string | null>(null);
-	const [selectedRouteIds, setSelectedRouteIds] = useState<string[]>([]);
-	const [selectedTripIds, setSelectedTripIds] = useState<string[]>([]);
 
 	const filters = useMemo(
 		() => ({ routeIds: selectedRouteIds, tripIds: selectedTripIds }),
@@ -28,15 +34,11 @@ export default function MainPage() {
 	};
 
 	const onRouteChange = (values: string[]) => {
-		setSelectedRouteIds(values);
-		// Clear trip selection when routes change so we don't keep invalid trip IDs
-		setSelectedTripIds([]);
-		setPage(1);
+		setRouteIds(values);
 	};
 
 	const onTripChange = (values: string[]) => {
-		setSelectedTripIds(values);
-		setPage(1);
+		setTripIds(values);
 	};
 
 	return (
