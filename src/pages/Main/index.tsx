@@ -51,9 +51,9 @@ export default function MainPage() {
 			/>
 			<div className="flex justify-between items-center gap-2 p-2">
 				<h1 className="text-3xl font-bold">Your Fleet</h1>
-				<button className="btn btn-primary" onClick={refetch}>
+				<button className="btn btn-primary text-(--color-primary-content)" onClick={refetch} disabled={isLoading}>
 					<ArrowClockwiseIcon size={16} />
-					<span>Refresh</span>
+					<span>{isLoading ? "Refreshing..." : "Refresh"}</span>
 				</button>
 			</div>
 			{detailVehicleId && (

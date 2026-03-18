@@ -17,7 +17,8 @@
   <img src="https://img.shields.io/badge/DaisyUI-5.5-FFC63A?logo=daisyui" />
 </p>
 
-A simple Fleet Management System using MBTA API.
+A simple Fleet Management System using MBTA API.  
+Part of Transjakarta Technical Test
 
 ## Architecture
 

@@ -1,5 +1,6 @@
 import { OCCUPANCY_STATUS_LABELS, UNKNOWN_STATUS_LABEL, VEHICLE_STATUS_LABELS, type Vehicle } from "@/types/Vehicle";
 import { UsersFourIcon, MapPinIcon, EyeIcon } from "@phosphor-icons/react";
+import moment from "moment";
 
 export default function VehicleCard({ vehicle, onClick }: { vehicle: Vehicle; onClick: () => void }) {
 	const renderItem = (icon: React.ReactNode, label: string, value: string, color?: string) => {
@@ -16,6 +17,9 @@ export default function VehicleCard({ vehicle, onClick }: { vehicle: Vehicle; on
 
 	const currentStatus = VEHICLE_STATUS_LABELS[vehicle.attributes.current_status] || UNKNOWN_STATUS_LABEL;
 	const occupancyStatus = OCCUPANCY_STATUS_LABELS[vehicle.attributes.occupancy_status] || UNKNOWN_STATUS_LABEL;
+
+	const updatedAt = new Date(vehicle.attributes.updated_at);
+	const fromNow = moment(updatedAt).fromNow();
 
 	return (
 		<div className="card bg-base-200 w-full h-auto min-h-[250px] flex flex-col gap-2 border-2 border-base-300 shadow-md">
@@ -40,7 +44,8 @@ export default function VehicleCard({ vehicle, onClick }: { vehicle: Vehicle; on
 			</div>
 			<div className="flex flex-col text-xs text-gray-500 px-4">
 				<strong>Last updated:</strong>
-				<p>{`${new Date(vehicle.attributes.updated_at).toLocaleString()}`}</p>
+				<p>{`${moment(updatedAt).format("MMM D, YYYY h:mm:ss A")}`}</p>
+				<p>{`(${fromNow})`}</p>
 			</div>
 			<div className="flex flex-col gap-2 p-4 pt-2">
 				<button

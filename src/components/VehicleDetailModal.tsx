@@ -26,6 +26,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { BIKES_ALLOWED_LABELS, WHEELCHAIR_ACCESSIBLE_LABELS, type TripAttributes } from "@/types/Trip";
 import Header from "./Header";
 import { ROUTE_TYPE_LABELS, type RouteAttributes } from "@/types/Route";
+import moment from "moment";
 
 interface VehicleDetailModalProps {
 	vehicleId: string;
@@ -96,6 +97,9 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 	const routeType = ROUTE_TYPE_LABELS[routeData.type] || "Unknown";
 	const directionDestinations = (routeData.direction_destinations || []).filter((d) => d);
 
+	const updatedAt = new Date(data.attributes.updated_at);
+	const fromNow = moment(updatedAt).fromNow();
+
 	return (
 		<dialog className="modal" open>
 			{error ? (
@@ -113,9 +117,12 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 									{currentStatus.label}
 								</span>
 							</div>
-							<div className="flex text-xs text-gray-500">
+							<div className="flex flex-col text-xs text-gray-500">
 								<strong>Last updated:&nbsp;</strong>
-								<p>{`${new Date(data.attributes.updated_at).toLocaleString()}`}</p>
+								<div className="flex flex-row items-center gap-1">
+									<p>{`${moment(updatedAt).format("MMM D, YYYY h:mm:ss A")}`}</p>
+									<p>{`(${fromNow})`}</p>
+								</div>
 							</div>
 						</div>
 						<div className="flex flex-col gap-2 min-h-0 overflow-y-auto">
@@ -188,9 +195,13 @@ export default function VehicleDetailModal({ vehicleId, onClose }: VehicleDetail
 						</div>
 
 						<div className="mt-auto flex flex-row items-center gap-2">
-							<button className="btn btn-primary" onClick={refetch}>
+							<button
+								className="btn btn-primary text-(--color-primary-content)"
+								onClick={refetch}
+								disabled={isLoading}
+							>
 								<ArrowClockwiseIcon size={16} />
-								<span>Refresh</span>
+								<span>{isLoading ? "Refreshing..." : "Refresh"}</span>
 							</button>
 							{renderCloseButton()}
 						</div>
