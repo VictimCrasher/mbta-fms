@@ -38,6 +38,56 @@ It'll also enables deployment on a regular hosting provider out of the box since
 **Why not Vite 8?**  
 Vite 8 was released on March 12, 2026. As of this time of writing (March 17, 2026) Tailwind Vite doesn't support Vite 8 out of the box yet.
 
+## Project structure
+
+```
+mbta-fms/
+├── public/
+│   └── bus.svg
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── Alert.tsx
+│   │   ├── CardSkeleton.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── MainLayout.tsx
+│   │   ├── MultiSelectDropdown.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Pagination.tsx
+│   │   ├── VehicleCard.tsx
+│   │   └── VehicleDetailModal.tsx
+│   ├── pages/
+│   │   └── Main/
+│   │       ├── index.tsx       # Main page (vehicle list)
+│   │       └── MainFilters.tsx
+│   ├── types/                # TypeScript type definitions
+│   │   ├── Alert.ts
+│   │   ├── Pages.ts
+│   │   ├── Route.ts
+│   │   ├── Trip.ts
+│   │   └── Vehicle.ts
+│   ├── utils/                # Hooks & API helpers
+│   │   ├── fetch.ts
+│   │   ├── index.ts
+│   │   ├── useGetRoutes.ts
+│   │   ├── useGetTrips.ts
+│   │   ├── useGetVehicle.ts
+│   │   ├── useGetVehicles.ts
+│   │   └── useUrlFilters.ts
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── .env
+├── .gitignore
+├── index.html
+├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+└── vite.config.ts
+```
+
 ## Setup
 
 ### Prerequisities
