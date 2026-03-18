@@ -45,38 +45,13 @@ mbta-fms/
 ├── public/
 │   └── bus.svg
 ├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── Alert.tsx
-│   │   ├── CardSkeleton.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Header.tsx
-│   │   ├── MainLayout.tsx
-│   │   ├── MultiSelectDropdown.tsx
-│   │   ├── Navbar.tsx
-│   │   ├── Pagination.tsx
-│   │   ├── VehicleCard.tsx
-│   │   └── VehicleDetailModal.tsx
-│   ├── pages/
-│   │   └── Main/
-│   │       ├── index.tsx       # Main page (vehicle list)
-│   │       └── MainFilters.tsx
+│   ├── components/           # Reusable UI components
+│   ├── pages/                # Pages components
 │   ├── types/                # TypeScript type definitions
-│   │   ├── Alert.ts
-│   │   ├── Pages.ts
-│   │   ├── Route.ts
-│   │   ├── Trip.ts
-│   │   └── Vehicle.ts
 │   ├── utils/                # Hooks & API helpers
-│   │   ├── fetch.ts
-│   │   ├── index.ts
-│   │   ├── useGetRoutes.ts
-│   │   ├── useGetTrips.ts
-│   │   ├── useGetVehicle.ts
-│   │   ├── useGetVehicles.ts
-│   │   └── useUrlFilters.ts
-│   ├── App.tsx
-│   ├── index.css
-│   ├── main.tsx
+│   ├── App.tsx               # Layout setup
+│   ├── index.css             # Main styling file
+│   ├── main.tsx              # Application entry point
 │   └── vite-env.d.ts
 ├── .env
 ├── .gitignore
