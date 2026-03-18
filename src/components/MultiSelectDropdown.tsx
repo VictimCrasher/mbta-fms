@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CaretDownIcon, XIcon } from "@phosphor-icons/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export type Option = { value: string; label: string };
+export type Option = { value: string; label: string; subtitle?: string };
 
 interface MultiSelectDropdownProps {
 	label: string;
@@ -126,7 +126,10 @@ export default function MultiSelectDropdown({
 											checked={selectedSet.has(opt.value)}
 											onChange={() => toggle(opt.value)}
 										/>
-										<span className="text-sm truncate">{opt.label}</span>
+										<div className="flex flex-col">
+											<span className="text-sm truncate">{opt.label}</span>
+											{opt.subtitle && <span className="text-xs text-gray-500">{opt.subtitle}</span>}
+										</div>
 									</label>
 								</li>
 							))}

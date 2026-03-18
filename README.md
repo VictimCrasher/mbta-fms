@@ -81,6 +81,8 @@ You can get the API key on MBTA Website [https://api-v3.mbta.com/](https://api-v
 npm run dev
 ```
 
+The app is now accessible at [http://localhost:5173/](http://localhost:5173/)
+
 ### 5. Build for Production
 
 ```bash

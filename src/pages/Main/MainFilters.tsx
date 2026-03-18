@@ -48,11 +48,11 @@ export default function MainFilters({
 			const headsign = t.attributes.headsign || "(No headsign)";
 			const name = t.attributes.name;
 			const tripID = t.id;
-			let label = `Trip ${tripID}: ${headsign}`;
+			let label = headsign;
 			if (name) {
 				label += ` (${name})`;
 			}
-			return { value: t.id, label };
+			return { value: t.id, label, subtitle: `ID: ${tripID}` };
 		});
 	}, [trips]);
 
